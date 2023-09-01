@@ -46,7 +46,10 @@ class _HomeState extends State<Home> {
           } else if (snapshot.hasData == true) {
             var data = snapshot.data as List<SongModel>;
 
-            return SongList(data: data);
+            return SongList(
+                data: data,
+                snapshot: snapshot,
+                playerController: playerController);
           } else {
             return const Center(child: CircularProgressIndicator());
           }
@@ -56,12 +59,15 @@ class _HomeState extends State<Home> {
   }
 }
 
-
-
 class SongList extends StatelessWidget {
+  final AsyncSnapshot snapshot;
+  final PlayerController playerController;
+
   const SongList({
     super.key,
     required this.data,
+    required this.snapshot,
+    required this.playerController,
   });
 
   final List<SongModel> data;
@@ -72,37 +78,49 @@ class SongList extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
         return Container(
-
-          margin:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
           ),
-
-          child: ListTile(
-
-            leading: const Icon(
-              Icons.music_note,
-              size: 32,
+          child: Obx(
+            () => ListTile(
+              leading: QueryArtworkWidget(
+                id: snapshot.data[index].id,
+                type: ArtworkType.AUDIO,
+                nullArtworkWidget: const Icon(Icons.music_note),
+                size: 50,
+              ),
+              title: Text(
+                //?If artist is null then show unknown
+                data[index].displayNameWOExt,
+                style: const TextStyle(fontWeight: normal, fontSize: 15),
+              ),
+              subtitle: Text(
+                //?If artist is null then show unknown
+                data[index].artist ?? 'Unknown',
+                style:
+                    const TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
+              ),
+              trailing: playerController.playIndex.value == index &&
+                      playerController.isPlaying.value == true
+                  ? const Icon(Icons.pause_circle)
+                  : const Icon(Icons.play_circle),
+              onTap: () {
+                if(playerController.playIndex.value == index && playerController.isPlaying.value == true){
+                  playerController.pauseSong(data[index].data, index);
+                  return;
+                }
+                else if(playerController.playIndex.value == index && playerController.isPlaying.value == false){
+                  playerController.playSong(data[index].data, index);
+                  return;
+                }
+                else{
+                  playerController.playSong(data[index].data, index);
+                  return;
+                }
+              },
             ),
-
-            title: Text(
-              //?If artist is null then show unknown
-              data[index].displayNameWOExt,
-              style: const TextStyle(fontWeight: normal, fontSize: 15),
-            ),
-
-            subtitle: Text(
-              //?If artist is null then show unknown
-              data[index].artist ?? 'Unknown',
-              style: const TextStyle(
-                  fontWeight: FontWeight.w200, fontSize: 12),
-            ),
-
-            trailing: const Icon(Icons.play_circle),
-
           ),
         );
       },
