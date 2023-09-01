@@ -1,3 +1,3 @@
 import 'dart:ui';
 
-Color bgcolor = const Color(0xFFD8B4F8);
+Color bgcolor = const Color.fromARGB(255, 229, 213, 244);
