@@ -1,16 +1,21 @@
-# symphoo
+# Symphoo Audio Player App
 
-A new Flutter project.
+Symphoo is a Flutter-based audio player app that allows you to enjoy your favorite music on the go. Whether you're commuting, working out, or relaxing at home, Symphoo has you covered with its user-friendly interface and feature-rich functionalities.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- **Play Your Music:** Symphoo lets you play your local audio files in various formats, ensuring you have access to all your favorite tracks.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Elegant Design:** Enjoy a sleek and intuitive design that makes navigating your music library a breeze.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Create Playlists:** Organize your songs into playlists to easily find and play the music you love.
+
+- **Control Playback:** Control playback with play, pause, skip, and shuffle options, all at your fingertips.
+
+- **Equalizer:** Customize your listening experience with a built-in equalizer for adjusting audio settings.
+
+- **Background Playback:** Keep the music playing even when the app is in the background or your device is locked.
+
+- **Lyrics Display:** Get the lyrics for your songs directly in the app (when available).
+
